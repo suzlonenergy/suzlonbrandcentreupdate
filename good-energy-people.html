@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good energy people | Suzlon Brand Centre</title>
+    
+    <!-- Mandatory Monda Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monda:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Core Brand Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Navpagescss.css">
+
+    <!-- Landing Page Showcase CSS -->
+    <style>
+        /* =========================================
+           SCROLL FIX OVERRIDE
+           This forces the browser to ignore any scroll-snapping 
+           or locked heights from your external CSS files.
+        ========================================= */
+        html, body {
+            scroll-behavior: auto !important;
+            scroll-snap-type: none !important;
+            height: auto !important;
+            overflow-y: visible !important;
+        }
+        * {
+            scroll-snap-align: none !important;
+        }
+        /* ========================================= */
+
+        .showcase-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;  Space between major sections 
+            padding-bottom: 6rem;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 4rem auto 0.1rem auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: var(--ever-teal, #007078);
+            margin-bottom: 0.1rem;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* 1. EVP Banner Section */
+        .evp-banner {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Wide banner format */
+            background-color: #f4f7f6;
+            background-image: url("Homepage Images/EVP.jpg");
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+/*            box-shadow: 0 15px 40px rgba(0, 112, 120, 0.15);*/
+/*            margin-bottom: 1.5rem;*/
+            transition: transform 0.4s ease;
+        }
+        .evp-banner:hover {
+            transform: scale(1.02);
+        }
+
+        /* 2. Values (3 Posters Grid) */
+        .grid-3-cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 3. Behaviours (4 Posters Grid) */
+        .grid-4-cols {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Poster Styling */
+        .poster-item {
+            width: 100%;
+            aspect-ratio: 1 / 1.414; /* Standard Poster/A4 Ratio */
+            background-color: #eef2f1;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .poster-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 112, 120, 0.2);
+        }
+
+        /* 4. Culture Film Video Section */
+        .video-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 1.5rem auto;
+            aspect-ratio: 16 / 9;
+            background-color: #000;
+            background-image: url('Homepage Images/Culture_Film.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        
+        .video-container::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 112, 120, 0.3);
+            transition: background 0.3s ease;
+        }
+
+        .video-container:hover::before {
+            background: rgba(0, 112, 120, 0.1);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 198, 39, 0.9); /* Prime Yellow */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .video-container:hover .play-button {
+            transform: scale(1.1);
+            background-color: #FFC627;
+        }
+
+        .play-button svg {
+            width: 35px;
+            height: 35px;
+            fill: #007078;
+            margin-left: 5px; /* Optically center the play triangle */
+        }
+
+        /* Action Buttons Wrapper */
+        .action-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+		
+		/* --- FLIP CARD STYLING --- */
+        .poster-item {
+            width: 100%;
+            aspect-ratio: 1 / 1.414; /* Standard Poster/A4 Ratio */
+            background-color: transparent;
+            perspective: 1000px; /* Gives the 3D depth effect */
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .poster-item:hover .flip-card-inner {
+            transform: rotateY(180deg);
+            box-shadow: 0 15px 35px rgba(0, 112, 120, 0.2);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .flip-card-front {
+            background-size: cover;
+            background-position: center;
+            background-color: #eef2f1;
+        }
+
+        .flip-card-back {
+            background-color: #007078; /* Ever Teal background */
+            color: white;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .flip-card-back h3 {
+			color: #FFC627; /* Prime Yellow */
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-transform: uppercase; /* Forces the text to be ALL CAPS */
+        }
+
+        .flip-card-back p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ffffff;
+            margin: 0;
+        }
+        /* ------------------------- */
+
+        /* MOBILE RESPONSIVENESS */
+        @media (max-width: 900px) {
+            .grid-3-cols {
+                grid-template-columns: repeat(1, 1fr);
+                gap: 2rem;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .grid-4-cols {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .evp-banner {
+                aspect-ratio: 16 / 9; /* Adjust banner ratio for mobile */
+            }
+        }
+        @media (max-width: 600px) {
+            .grid-4-cols {
+                grid-template-columns: repeat(1, 1fr);
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global Navigation -->
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="Homepage Images/Asset 1@2x-8.png" alt="Suzlon Logo" style="height: 45px; border: none;">
+            </a>
+        </div>
+           <nav class="nav-links">
+        
+        <a href="TheGoodIdentity.html" >The Good Identity</a>
+            <a href="TheGoodExpression.html" >The Good Expression</a>
+            <a href="touchpoints.html" >Good at Every Touchpoint</a>
+			<a href="thegoodvoice.html" >Speak with Goodness</a>
+			<a href="good-energy-people.html"  class="active-nav">The Good Energy People</a>
+    </nav>
+    </header>
+
+    <main class="editorial-main" style="margin-top: 0; padding-top: 0;">
+        
+<section class="page-hero" style="margin-top: 0; margin-bottom: 0; padding: 6rem 8%; background: url('Homepage Images/Good energy people.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; box-sizing: border-box;">
+    
+    <div class="page-hero-content reveal" style="text-align: center; margin: 0 auto; max-width: 1200px;">
+        <h1 style="margin-bottom: 0.5rem; line-height: 1.2; color: #ffffff;">Good energy people</h1>
+        <p style="margin-top: 0; font-size: 1.2rem; line-height: 1.6; color: #ffffff;">Discover our employer brand. Tools, guidelines, and visual assets to nurture our internal culture, attract top talent, and empower our workforce.</p>
+    </div>
+    
+</section>
+
+<!-- Landing Page Showcase Container -->
+<!-- Added padding-top: 0 to ensure the container itself doesn't add space -->
+<div class="showcase-container" style="padding-top: 0;">
+
+    <!-- 1. Employee Value Proposition Banner -->
+    <section>
+        <!-- Added margin-top: 2rem (or set to 0 if you want it completely touching) to override the default 4rem gap -->
+        <div class="section-header" style="margin-top: 2rem; ">
+            <h2>Employee Value Proposition</h2>
+            <p>The core positioning and messaging framework that makes Suzlon an employer of choice. Use this banner for internal portals and hiring platforms.</p>
+        </div>
+        <div class="evp-banner"></div>
+        
+    </section>
+
+    <!-- ... rest of your code ... -->
+	 <section>
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <h2>Our Values</h2>
+                    <p>A standardized set of 3 posters highlighting the core values that drive our daily operations and global mindset.</p>
+                </div>
+                
+                <div class="grid-3-cols">
+                    
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage%20Images/Courage.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Courage In Every Step</h3>
+                                <p>We bring courage to every decision and step; innovating, leading
+change, and pioneering new paths, even when it's tough. This courage
+shows up in how we innovate: by questioning existing systems, taking
+responsibility for new ideas, and committing to make them work in the
+real world. We keep moving forward with confidence, shaping reliable
+energy solutions that meet today's needs and tomorrow's potential.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage%20Images/Empathy.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Empathy For All</h3>
+                                <p>We listen deeply, stay humble in our approach, and understand diverse
+needs with genuine care. This empathy builds strong, lasting relationships
+beyond contracts, strengthens self-reliance in communities, and supports
+our teams in doing their best work. By valuing people and partnerships as a
+core strength, we ensure our progress lifts others while delivering
+uninterrupted outcomes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage%20Images/Making%20it%20happen.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Making it happen Now</h3>
+                                <p>We take ownership to turn plans into reality, handling the details so our
+partners can focus on their growth. It's about being dependable, adapting
+quickly, and delivering without excuses. This commitment builds trust
+and keeps progress uninterrupted, for us and everyone we serve.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header"  style="margin-bottom: 2rem;">
+                    <h2>Our Behaviours</h2>
+                    <p>A comprehensive set of 4 posters detailing the actionable behaviours expected across all our teams.</p>
+                </div>
+                
+                <div class="grid-4-cols">
+                    
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/care.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Lead With Care</h3>
+                                <p>We nurture an environment of safety, respect, and well-being for everyone.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/boldly.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Explore Boldly</h3>
+                                <p>We step out of our comfort zones to innovate and embrace new challenges.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/One.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Power of One</h3>
+                                <p>We collaborate seamlessly across teams and borders as one unified Suzlon.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/Real.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Remarkably Real</h3>
+                                <p>We act with authenticity, transparency, and uncompromising integrity in all we do.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+			<!-- 3.5 Employee Value Proposition Posters -->
+            <section>
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <h2>Employee Value Proposition</h2>
+                    <p>A set of 4 posters detailing the core principles of our EVP: Good Energy People.</p>
+                </div>
+                
+                <div class="grid-4-cols">
+                    
+                    <!-- EVP 1 -->
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/WorkWithTheBest.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Work with the best</h3>
+                                <p>Join a team of industry pioneers and experts. We surround ourselves with top talent to continuously elevate our standards and deliver unmatched green energy solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EVP 2 -->
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/SetNoLimits.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Set no limits</h3>
+                                <p>We empower our people to think bigger. Whether it's innovating new turbine technologies or optimizing grid controls, we remove barriers so your potential is limitless.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EVP 3 -->
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/ShapeTheNewWorldTogether.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Shape the new world, together</h3>
+                                <p>Every role at Suzlon contributes directly to the global energy transition. We collaborate across borders to build a sustainable, renewable future for generations to come.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EVP 4 -->
+                    <div class="poster-item">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: url('Homepage Images/LeadByLearning.jpg');"></div>
+                            <div class="flip-card-back">
+                                <h3>Lead by learning</h3>
+                                <p>The energy landscape evolves rapidly, and so do we. We foster a culture of continuous growth, curiosity, and upskilling to stay ahead of the curve.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+           <!-- 4. Culture Film -->
+            <section>
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <h2>Culture Film</h2>
+                </div>
+                
+                <!-- Modern YouTube Iframe Embed (Perfect 16:9 Aspect Ratio) -->
+                <div class="video-container" style="background-image: none; background-color: #000; overflow: hidden; margin-bottom: 3rem">
+                    
+                    <!-- Removed the scale transform so it fits the standard YouTube 16:9 frame perfectly -->
+                    <iframe 
+                        width="100%" 
+                        height="100%" 
+                        src="https://www.youtube.com/embed/ioabYpRdazY?autoplay=1&mute=1&loop=1&playlist=ioabYpRdazY&controls=0&disablekb=1&fs=0&modestbranding=1&iv_load_policy=3&cc_load_policy=0" 
+                        title="Suzlon Culture Film" 
+                        frameborder="0" 
+                        allow="autoplay; web-share" 
+                        allowfullscreen
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                    </iframe>
+                    
+                    <!-- Keeping the overlay to maintain the brand look -->
+                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 112, 120, 0.1); z-index: 1;"></div>
+                   
+                </div>
+
+                <div class="action-wrapper">
+                    <a href="https://www.youtube.com/watch?v=ioabYpRdazY" class="contact-btn" target="_blank">
+                        Watch Full Video <span class="arrow">&rarr;</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Support / Contact Section -->
+    <footer class="support-section">
+        <div class="support-content">
+            <h2>Need customized recruitment collateral?</h2>
+            <p>If you require specific hiring event branding or specialized HR communication designs, reach out to the central studio.</p>
+            <div>
+                <a href="mailto:corpcom@suzlon.com" class="contact-btn">
+                    Contact Central Studio <span class="arrow">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
